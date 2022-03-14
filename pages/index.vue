@@ -12,13 +12,13 @@
       "
       v-if="loading"
     >
-      <font-awesome-icon icon="fa-solid fa-crow" class="fa-fw fa-3x" />
+      <i class="fa-solid fa-crow fa-fw fa-3x"></i>
       <h3 class="mt-3">Get ready!</h3>
     </div>
 
     <header class="row w-100 text-white" v-if="!loading && $store.state.start">
       <div class="col-3 d-flex align-items-center justify-content-center">
-        <font-awesome-icon icon="fa-solid fa-crow" class="fa-2x" />
+        <i icon="fa-solid fa-crow" class="fa-2x"></i>
       </div>
       <div class="col-6">
         <h1 class="my-3 text-light text-center" style="letter-spacing: 3px">
@@ -26,8 +26,7 @@
         </h1>
       </div>
       <div class="col-3 d-flex align-items-center justify-content-center">
-        <i class="fa fa-bar-chart text-white"></i>
-        <font-awesome-icon icon="fa-solid fa-bar-chart" class="fa-2x" />
+        <i class="fa fa-bar-chart text-white fa-2x"></i>
       </div>
     </header>
     <Intro v-if="!loading && !$store.state.start" />

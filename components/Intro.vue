@@ -11,10 +11,7 @@
   >
     <div class="row">
       <div class="col text-white text-center">
-        <font-awesome-icon
-          icon="fa-solid fa-crow"
-          class="fa-fw fa-3x mb-3 p-4 birdIcon"
-        />
+        <i class="fa-solid fa-crow fa-fw fa-3x mb-3 p-4 birdIcon"></i>
       </div>
     </div>
     <div class="row">
@@ -25,7 +22,7 @@
           Birtle is a game about birds.
           <br />
           <br />
-          Guess the word. Four tries.
+          Guess the word. Five tries.
           <br />
           <br />
           The word's about birds.
