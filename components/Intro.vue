@@ -5,7 +5,8 @@
       min-vh-100
       d-flex
       flex-column
-      justify-content-center
+      justify-content-lg-center justify-content-start
+      mt-5 mt-lg-0
       align-items-center
     "
   >
