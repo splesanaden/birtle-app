@@ -84,11 +84,10 @@ export default {
 
       today = mm + "/" + dd + "/" + yyyy;
       var scores =
-        "I got today's Birtle on " +
         today +
-        ":\n in " +
-        this.$timeFormat(this.$store.state.solveTime) +
-        " seconds.\n";
+        ": I got today's Birtle in " +
+        +this.$timeFormat(this.$store.state.solveTime) +
+        ".\n";
       for (var r in this.$store.state.board) {
         var row = this.$store.state.board[r];
         for (var c in row.cells) {
