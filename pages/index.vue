@@ -28,7 +28,7 @@
           BIRTLE <span style="font-size: 12px; font-weight: 300"> v0.1</span>
         </h1>
       </div>
-      <div class="col-1 d-flex align-items-center justify-content-center">
+      <div class="col-3 d-flex align-items-center justify-content-center">
         <a href="Stats" class="wg-link">
           <i class="fa fa-bar-chart text-white fa-2x"></i>
         </a>
