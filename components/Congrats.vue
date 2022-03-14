@@ -95,7 +95,10 @@ export default {
           if (cell.guess && cell.guess == cell.value) {
             scores += "🟩";
           } else {
-            if (!row.scored) return scores;
+            if (!row.scored) {
+              console.log(this.$store.state.solveTime);
+              return scores;
+            }
             if (
               cell.guess &&
               row.scored &&
@@ -103,13 +106,8 @@ export default {
               cell.guess !== cell.value
             ) {
               //word contains letter but not in correct position
-              if (
-                cell.guess &&
-                row.cells[i].guess == cell.guess &&
-                i !== cell.id
-              ) {
-                scores += "🟨";
-              }
+
+              scores += "🟨";
             } else {
               scores += "⬜";
             }
@@ -120,6 +118,7 @@ export default {
         }
       }
       console.log("scores", scores);
+      console.log(this.$store.state.solveTime);
       return scores;
     },
     fallbackCopyTextToClipboard(text) {

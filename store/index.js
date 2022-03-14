@@ -336,6 +336,7 @@ export const mutations = {
         //check every cell
         for (var cell in row.cells) {
             var alphIndex = state.alphObj.indexOf(state.alphObj.find(item => item.letter == row.cells[cell].guess));
+            //if incorrect but in word in other position
             if (row.cells[cell].guess !== row.cells[cell].value && state.word.includes(row.cells[cell].guess)) {
                 state.alphObj[alphIndex].inWord = true;
             } else
@@ -347,14 +348,25 @@ export const mutations = {
                         //every cell is valid
                         state.solveTime = state.time;
                         state.solved = true;
+                        return;
 
                     }
                 }
+
+
         }
+        //found nothing after looping em all
 
 
-        state.activeCell.row++;
-        state.activeCell.cell = 0;
+        if (state.activeCell.row < state.board.length - 1) {
+            state.activeCell.row++;
+            state.activeCell.cell = 0;
+        } else {
+            state.fail = true;
+            state.solved = true;
+            state.solveTime = state.time;
+
+        }
         state.disableKeyboard = false;
     },
     deleteLetter(state) {

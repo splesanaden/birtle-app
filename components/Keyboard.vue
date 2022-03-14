@@ -21,10 +21,12 @@
           'keyboard-key': true,
           'check-me':
             activeCell.cell == 4 &&
-            board[activeCell.row].cells[activeCell.cell].guess,
+            $store.state.board[activeCell.row].cells[activeCell.cell].guess,
         }"
         @click="$store.commit('checkRow')"
-        :disabled="!board[activeCell.row].cells[4].guess"
+        :disabled="
+          !$store.state.board[$store.state.activeCell.row].cells[4].guess
+        "
       >
         CHECK
       </div>

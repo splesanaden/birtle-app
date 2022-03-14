@@ -19,7 +19,7 @@
     <header class="row w-100 text-white" v-if="!loading">
       <div class="col-3 d-flex align-items-center justify-content-center">
         <i
-          class="fa-solid fa-crow fa-fw fa-2x wg-link"
+          class="fa-solid fa-crow fa-fw fa-2x wg-link chirp"
           @click="$store.commit('toggleHelp')"
         ></i>
       </div>
@@ -28,7 +28,7 @@
           BIRTLE <span style="font-size: 12px; font-weight: 300"> v0.1</span>
         </h1>
       </div>
-      <div class="col-3 d-flex align-items-center justify-content-center">
+      <div class="col-1 d-flex align-items-center justify-content-center">
         <a href="stats" class="wg-link">
           <i class="fa fa-bar-chart text-white fa-2x"></i>
         </a>
@@ -68,12 +68,16 @@
       :disableKeyboard="disableKeyboard"
     />
 
-    <Congrats v-show="$store.state.solved" class="my-5" />
+    <Congrats v-show="$store.state.solved && !$store.state.fail" class="my-5" />
 
-    <Congrats v-show="$store.state.fail" />
+    <Failure v-show="$store.state.fail" />
 
     <section class="container mt-2 mb-auto">
-      <div class="row" id="timeRow" v-show="!$store.state.solved">
+      <div
+        class="row"
+        id="timeRow"
+        v-show="!$store.state.solved && !$store.state.fail"
+      >
         <div class="col-3"></div>
         <div class="col-6 text-light text-center">
           <h3>{{ $timeFormat(this.$store.state.time) }}</h3>

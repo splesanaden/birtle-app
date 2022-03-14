@@ -44,7 +44,7 @@
       <div class="row">
         <div class="col-12 text-center text-white">
           <h2>
-            <a href="/" class="btn wg-btn"> Share </a>
+            <a href="/" class="btn wg-btn"> Go back... </a>
           </h2>
         </div>
       </div>
