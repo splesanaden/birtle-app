@@ -2,6 +2,7 @@
   "name": "birtle-app",
   "version": "1.0.0",
   "private": true,
+  "homepage": "birtle.app",
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",

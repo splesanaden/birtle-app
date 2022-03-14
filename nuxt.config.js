@@ -6,7 +6,7 @@ export default {
   },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'word-app',
+    title: 'BIRTLE GAME | A GAME ABOUT BIRDS',
     htmlAttrs: {
       lang: 'en'
     },
