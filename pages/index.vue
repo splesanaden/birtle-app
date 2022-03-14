@@ -29,7 +29,7 @@
         </h1>
       </div>
       <div class="col-1 d-flex align-items-center justify-content-center">
-        <a href="stats" class="wg-link">
+        <a href="Stats" class="wg-link">
           <i class="fa fa-bar-chart text-white fa-2x"></i>
         </a>
       </div>
