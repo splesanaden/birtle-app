@@ -3,107 +3,159 @@ export const state = () => ({
     alphObj: [
         {
             "letter": "q",
-            "guessed": false
+            "guessed": false,
+            "correct": false,
+            "inWord": false,
         },
         {
             "letter": "w",
-            "guessed": false
+            "guessed": false,
+            "correct": false,
+            "inWord": false,
         },
         {
             "letter": "e",
-            "guessed": false
+            "guessed": false,
+            "correct": false,
+            "inWord": false,
         },
         {
             "letter": "r",
-            "guessed": false
+            "guessed": false,
+            "correct": false,
+            "inWord": false,
         },
         {
             "letter": "t",
-            "guessed": false
+            "guessed": false,
+            "correct": false,
+            "inWord": false,
         },
         {
             "letter": "y",
-            "guessed": false
+            "guessed": false,
+            "correct": false,
+            "inWord": false,
         },
         {
             "letter": "u",
-            "guessed": false
+            "guessed": false,
+            "correct": false,
+            "inWord": false,
         },
         {
             "letter": "i",
-            "guessed": false
+            "guessed": false,
+            "correct": false,
+            "inWord": false,
         },
         {
             "letter": "o",
-            "guessed": false
+            "guessed": false,
+            "correct": false,
+            "inWord": false,
         },
         {
             "letter": "p",
-            "guessed": false
+            "guessed": false,
+            "correct": false,
+            "inWord": false,
         },
         {
             "letter": "a",
-            "guessed": false
+            "guessed": false,
+            "correct": false,
+            "inWord": false,
         },
         {
             "letter": "s",
-            "guessed": false
+            "guessed": false,
+            "correct": false,
+            "inWord": false,
         },
         {
             "letter": "d",
-            "guessed": false
+            "guessed": false,
+            "correct": false,
+            "inWord": false,
         },
         {
             "letter": "f",
-            "guessed": false
+            "guessed": false,
+            "correct": false,
+            "inWord": false,
         },
         {
             "letter": "g",
-            "guessed": false
+            "guessed": false,
+            "correct": false,
+            "inWord": false,
         },
         {
             "letter": "h",
-            "guessed": false
+            "guessed": false,
+            "correct": false,
+            "inWord": false,
         },
         {
             "letter": "j",
-            "guessed": false
+            "guessed": false,
+            "correct": false,
+            "inWord": false,
         },
         {
             "letter": "k",
-            "guessed": false
+            "guessed": false,
+            "correct": false,
+            "inWord": false,
         },
         {
             "letter": "l",
-            "guessed": false
+            "guessed": false,
+            "correct": false,
+            "inWord": false,
         },
         {
             "letter": "z",
-            "guessed": false
+            "guessed": false,
+            "correct": false,
+            "inWord": false,
         },
         {
             "letter": "x",
-            "guessed": false
+            "guessed": false,
+            "correct": false,
+            "inWord": false,
         },
         {
             "letter": "c",
-            "guessed": false
+            "guessed": false,
+            "correct": false,
+            "inWord": false,
         },
         {
             "letter": "v",
-            "guessed": false
+            "guessed": false,
+            "correct": false,
+            "inWord": false,
         },
         {
             "letter": "b",
-            "guessed": false
+            "guessed": false,
+            "correct": false,
+            "inWord": false,
         },
         {
             "letter": "n",
-            "guessed": false
+            "guessed": false,
+            "correct": false,
+            "inWord": false,
         },
         {
             "letter": "m",
-            "guessed": false
+            "guessed": false,
+            "correct": false,
+            "inWord": false,
         }
     ],
     word: "talon",
@@ -111,6 +163,8 @@ export const state = () => ({
     solved: false,
     fail: false,
     time: 0,
+    viewScores: false,
+    viewHelp: true,
     solveTime: null,
     disableKeyboard: false,
     activeCell: {
@@ -121,6 +175,7 @@ export const state = () => ({
         {
             row: 0,
             scored: false,
+            guess: [],
             cells: [
                 {
                     id: 0,
@@ -136,6 +191,7 @@ export const state = () => ({
         {
             row: 1,
             scored: false,
+            guess: [],
             cells: [
                 {
                     id: 0,
@@ -152,6 +208,7 @@ export const state = () => ({
         {
             row: 2,
             scored: false,
+            guess: [],
             cells: [
                 {
                     id: 0,
@@ -168,6 +225,7 @@ export const state = () => ({
         {
             row: 3,
             scored: false,
+            guess: [],
             cells: [
                 {
                     id: 0,
@@ -184,6 +242,7 @@ export const state = () => ({
         {
             row: 4,
             scored: false,
+            guess: [],
             cells: [
                 {
                     id: 0,
@@ -218,7 +277,7 @@ export const mutations = {
         var board = state.board;
         var activeCell = state.activeCell;
         var disableKeyboard = state.disableKeyboard;
-        // console.log("press:", "letter:" + letter, state.board);
+
         if (
             state.activeCell.row <= state.board[state.activeCell.row].row &&
             activeCell.cell <=
@@ -228,6 +287,14 @@ export const mutations = {
             //add letter to active cell and move up a cell
             board[activeCell.row].cells[activeCell.cell].guess =
                 letter.letter;
+            board[activeCell.row].guess[activeCell.cell] = letter.letter;
+            state.alphObj.forEach(item => {
+                //find entered letter in obj
+                if (item.letter == letter.letter) {
+                    item.guessed = true;
+
+                }
+            });
 
             // if last cell in last row, escape
             if (
@@ -245,13 +312,11 @@ export const mutations = {
             ) {
                 //DO NOTHING - user needs to check row. Disable keyboard?
                 disableKeyboard = true;
-                // activeCell.row++;
-                // activeCell.cell = 0;
-                // window.navigator.vibrate(200);
+
             } else {
                 activeCell.cell++;
             }
-            letter.guessed = true;
+            if (letter != 'space') { letter.guessed = true; }
         } else {
             //done?
         }
@@ -268,16 +333,23 @@ export const mutations = {
         var row = state.board[state.activeCell.row];
         row.scored = true;
         var counter = 0;
+        //check every cell
         for (var cell in row.cells) {
-            //check every cell
-            if (row.cells[cell].guess == row.cells[cell].value) {
-                counter++;
-                if (counter == row.cells.length) {
-                    //every cell is valid
-                    state.solveTime = state.time;
-                    state.solved = true;
+            var alphIndex = state.alphObj.indexOf(state.alphObj.find(item => item.letter == row.cells[cell].guess));
+            if (row.cells[cell].guess !== row.cells[cell].value && state.word.includes(row.cells[cell].guess)) {
+                state.alphObj[alphIndex].inWord = true;
+            } else
+                // if guess is correct, add to counter (5 pts wins)
+                if (row.cells[cell].guess == row.cells[cell].value) {
+                    counter++;
+                    state.alphObj[alphIndex].correct = true;
+                    if (counter == row.cells.length) {
+                        //every cell is valid
+                        state.solveTime = state.time;
+                        state.solved = true;
+
+                    }
                 }
-            }
         }
 
 
@@ -296,9 +368,6 @@ export const mutations = {
             state.activeCell.cell--;
         }
 
-        //if start
-
-
         //if end
         if (state.activeCell.cell == 4) {
             //if end has a value, erase it and go back a position. If it's blank, delete #3
@@ -311,17 +380,41 @@ export const mutations = {
                 state.activeCell.cell = 4;
             }
         }
-
+        var letter = state.board[state.activeCell.row].cells[state.activeCell.cell].guess;
         state.board[state.activeCell.row].cells[state.activeCell.cell].guess = "";
+        state.board[state.activeCell.row].guess[state.activeCell.cell] = "";
         console.log(state.activeCell.row, state.activeCell.cell);
+        state.alphObj.forEach(item => {
+            if (item.letter == letter.letter) {
+                item.correct = false;
+                item.inWord = false;
+                item.guessed = false;
+            }
+        });
+
+
         state.disableKeyboard = false;
     },
 
     increaseTime(state) {
-        if (!state.solved) {
+        if (!state.solved && state.start) {
             state.time++;
+            // sessionStorage.setItem('time', state.time);
         } else {
-            state.time = 0;
+            // state.time = 0;
+        }
+    },
+    setTime(state) {
+        state.time = sessionStorage.getItem('time');
+    },
+
+    toggleHelp(state) {
+        state.viewHelp = !state.viewHelp;
+        state.start = !state.start;
+        if (!state.start && state.time == 0) {
+            state.viewHelp = false;
+            this.$store.commit("initBoard");
+            state.start = true;
         }
     }
 

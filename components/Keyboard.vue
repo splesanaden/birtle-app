@@ -7,8 +7,9 @@
         :key="letter.letter"
         :wg-letter="letter.letter"
         @click="$store.commit('letterPress', letter)"
-        :disabled="letter.guessed"
-        :correct="scored && letter.guessed && word.includes(letter.letter)"
+        :guessed="letter.guessed"
+        :in-word="letter.guessed && letter.inWord"
+        :correct="letter.guessed && letter.correct"
       >
         {{ letter.letter == " " ? "SPACE" : letter.letter }}
       </div>
@@ -23,7 +24,7 @@
             board[activeCell.row].cells[activeCell.cell].guess,
         }"
         @click="$store.commit('checkRow')"
-        :disabled="activeCell.cell != 4"
+        :disabled="!board[activeCell.row].cells[4].guess"
       >
         CHECK
       </div>
@@ -31,7 +32,9 @@
         wg-letter="space"
         class="keyboard-key"
         @click="$store.commit('letterPress', 'space')"
-        :disabled="disableKeyboard || activeCell.cell == 4"
+        :disabled="
+          disableKeyboard || activeCell.cell == 3 || activeCell.cell == 4
+        "
       >
         SPACE
       </div>
@@ -65,7 +68,10 @@ export default {
   computed: {
     scored() {
       //   console.log(this.board[this.activeCell.row], this.activeCell);
-      if (this.activeCell.row - 1 == 0 && this.board[0].scored) {
+      if (
+        this.activeCell.row - 1 == 0 &&
+        this.board[this.activeCell.row].scored
+      ) {
         return true;
       } else if (
         this.activeCell.row == this.board.length &&
@@ -154,16 +160,26 @@ export default {
     box-shadow: inset -2px -2px 3px rgba(255, 255, 255, 0.6),
       inset 2px 2px 3px rgba(0, 0, 0, 0.6);
   }
-  &[disabled] {
+  &[guessed] {
     background-color: #8f7d82;
     // color: #6e5c62;
     // cursor: not-allowed;
     // pointer-events: none;
   }
+  &[disabled] {
+    background-color: #8f7d82;
+    color: white;
+    pointer-events: none;
+    // cursor: not-allowed;
+  }
+  &[in-word] {
+    background-color: #e09b07;
+    // color: #6e5c62;
+    // pointer-events: none;
+  }
   &[correct] {
     background-color: rgb(0, 82, 18);
     // color: #6e5c62;
-    // cursor: not-allowed;
     // pointer-events: none;
   }
 

@@ -16,24 +16,25 @@
       <h3 class="mt-3">Get ready!</h3>
     </div>
 
-    <header class="row w-100 text-white" v-if="!loading && $store.state.start">
+    <header class="row w-100 text-white" v-if="!loading">
       <div class="col-3 d-flex align-items-center justify-content-center">
-        <i icon="fa-solid fa-crow" class="fa-2x"></i>
+        <i
+          class="fa-solid fa-crow fa-fw fa-2x wg-link"
+          @click="$store.commit('toggleHelp')"
+        ></i>
       </div>
       <div class="col-6">
         <h1 class="my-3 text-light text-center" style="letter-spacing: 3px">
-          BIRTLE
+          BIRTLE <span style="font-size: 12px; font-weight: 300"> v0.1</span>
         </h1>
       </div>
       <div class="col-3 d-flex align-items-center justify-content-center">
-        <i class="fa fa-bar-chart text-white fa-2x"></i>
+        <a href="stats" class="wg-link">
+          <i class="fa fa-bar-chart text-white fa-2x"></i>
+        </a>
       </div>
     </header>
-    <Intro v-if="!loading && !$store.state.start" />
-    <main
-      class="wg-board"
-      v-if="!$store.state.solved && !loading && $store.state.start"
-    >
+    <main class="wg-board" v-if="!$store.state.solved && !loading">
       <div
         class="wg-row"
         v-for="row in board"
@@ -60,18 +61,16 @@
       </div>
     </main>
     <Keyboard
-      v-if="!$store.state.solved && !loading && $store.state.start"
+      v-if="!$store.state.solved && !loading"
       @letter-press="$store.commit('letterPress', $event)"
       @delete-letter="$store.commit('deleteLetter', $event)"
       @check-row="$store.commit('checkRow', $event)"
       :disableKeyboard="disableKeyboard"
     />
-    <transition name="fade">
-      <Congrats v-show="$store.state.solved" class="my-5" />
-    </transition>
-    <transition name="fade">
-      <Congrats v-show="$store.state.fail" />
-    </transition>
+
+    <Congrats v-show="$store.state.solved" class="my-5" />
+
+    <Congrats v-show="$store.state.fail" />
 
     <section class="container mt-2 mb-auto">
       <div class="row" id="timeRow" v-show="!$store.state.solved">
@@ -80,6 +79,17 @@
           <h3>{{ $timeFormat(this.$store.state.time) }}</h3>
         </div>
         <div class="col-3"></div>
+      </div>
+    </section>
+    <section class="wg-modal" v-if="$store.state.viewHelp">
+      <div class="container">
+        <div class="row w-100 text-end mt-2">
+          <i
+            class="fa-solid fa-close text-light fa-2x wg-link"
+            @click="$store.commit('toggleHelp')"
+          ></i>
+        </div>
+        <Intro />
       </div>
     </section>
   </div>

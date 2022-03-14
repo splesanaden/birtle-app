@@ -11,7 +11,7 @@
   >
     <div class="row">
       <div class="col text-white text-center">
-        <i class="fa-solid fa-crow fa-fw fa-3x mb-3 p-4 birdIcon"></i>
+        <i class="fa-solid fa-crow fa-fw fa-3x mb-3 birdIcon"></i>
       </div>
     </div>
     <div class="row">
@@ -27,7 +27,7 @@
           <br />
           The word's about birds.
         </div>
-        <button class="btn wg-btn my-4" @click="$store.commit('startGame')">
+        <button class="btn wg-btn my-4" @click="$store.commit('toggleHelp')">
           Start
         </button>
       </div>
@@ -48,5 +48,10 @@ export default {
 .birdIcon {
   border-radius: 20px;
   background: #b195a1;
+  aspect-ratio: 1;
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>
