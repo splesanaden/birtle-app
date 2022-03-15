@@ -184,7 +184,9 @@ export default {
 
     today = yyyy + "-" + mm + "-" + dd;
     var solved = this.$cookies.get("solved");
+    console.log("does ", solved, "exist?");
     if (!solved) {
+      console.log("no.");
       solved = document.cookie;
       console.log(
         "cant get cookie, using alt method",
@@ -195,8 +197,13 @@ export default {
       if (solved.includes(today)) {
         this.redirect = true;
       }
-    } else if (solved.indexOf(today)) {
-      this.redirect = true;
+    } else {
+      console.log("yes!");
+      if (solved.indexOf(today)) {
+        this.redirect = true;
+      } else {
+        this.redirect = false;
+      }
     }
     console.log("solved?", solved, "redirect? ", this.redirect);
     if (this.redirect && !window.location.search.includes("lemmein")) {
