@@ -191,8 +191,11 @@ export default {
         solved,
         solved.includes(today)
       );
-    }
-    if (solved.indexOf(today)) {
+      console.log(this);
+      if (solved.includes(today)) {
+        this.redirect = true;
+      }
+    } else if (solved.indexOf(today)) {
       this.redirect = true;
     }
     console.log("solved?", solved, "redirect? ", this.redirect);
