@@ -269,7 +269,7 @@ export const mutations = {
     },
     async initBoard(state, data) {
 
-        // console.log('word:', data)
+        console.log('word:', data)
 
 
         state.word = data.word;

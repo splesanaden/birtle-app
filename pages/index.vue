@@ -215,7 +215,8 @@ export default {
         cache: "no-cache",
         referrerPolicy: "no-referrer",
       });
-      var wordData = await req.text();
+      var wordData = JSON.parse(atob(await req.text()));
+      console.log(wordData);
       // var wordData = {
       //   word: "eagle",
       //   date: "2022-03-15",
