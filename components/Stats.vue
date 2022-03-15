@@ -7,6 +7,11 @@
     "
   >
     <div class="row">
+      <div class="col text-white text-center mb-4">
+        <h1>You've solved today's puzzle!</h1>
+      </div>
+    </div>
+    <div class="row">
       <div class="col text-white text-center">
         <i class="fa-solid fa-crow fa-fw fa-3x mb-3 birdIcon mx-auto"></i>
       </div>
