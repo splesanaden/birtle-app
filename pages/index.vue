@@ -191,12 +191,17 @@ export default {
       this.$router.push("Stats");
       console.log("already solved");
     } else {
-      var req = await fetch("https://api.birtle.app/word", {
-        mode: "cors",
-        cache: "no-cache",
-        referrerPolicy: "no-referrer",
+      // var req = await fetch("https://api.birtle.app/word", {
+      //   mode: "cors",
+      //   cache: "no-cache",
+      //   referrerPolicy: "no-referrer",
+      // });
+      // var wordData = await req.text();
+      var wordData = JSON.stringify({
+        word: "eagle",
+        date: "2022-03-15",
+        hint: "Associated with the largest source of funding of the freedom convoy.",
       });
-      var wordData = await req.text();
       if (window.location.search.includes("lemmein")) {
         console.log(wordData);
       }
