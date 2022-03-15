@@ -182,15 +182,15 @@ export default {
     var yyyy = today.getFullYear();
     var redirect = false;
     today = +yyyy + "-" + mm + "-" + dd;
-    var solved = this.$cookies.get("solved");
-    if (solved.includes(today)) {
-      redirect = true;
-    }
-    console.log("solved?", solved, "redirect? ", redirect);
-    if (redirect && !window.location.search.includes("lemmein")) {
-      this.$router.push("Stats");
-      console.log("already solved");
-    }
+    // var solved = this.$cookies.get("solved");
+    // if (solved.includes(today)) {
+    //   redirect = true;
+    // }
+    // console.log("solved?", solved, "redirect? ", redirect);
+    // if (redirect && !window.location.search.includes("lemmein")) {
+    //   this.$router.push("Stats");
+    //   console.log("already solved");
+    // }
     // else {
     // var req = await fetch("https://api.birtle.app/word", {
     //   mode: "cors",
