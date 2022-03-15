@@ -186,6 +186,11 @@ export default {
     var solved = this.$cookies.get("solved");
     if (!solved) {
       solved = document.cookie;
+      console.log(
+        "cant get cookie, using alt method",
+        solved,
+        solved.includes(today)
+      );
     }
     if (solved.indexOf(today)) {
       this.redirect = true;
