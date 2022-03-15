@@ -185,7 +185,7 @@ export default {
     today = yyyy + "-" + mm + "-" + dd;
     var solved = this.$cookies.get("solved");
     if (!solved) {
-      solved = document.cookie.includes(today);
+      solved = document.cookie;
     }
     if (solved.indexOf(today)) {
       this.redirect = true;
