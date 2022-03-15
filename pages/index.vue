@@ -114,6 +114,7 @@ export default {
       disableKeyboard: this.$store.state.disableKeyboard,
       activeCell: this.$store.state.activeCell,
       board: this.$store.state.board,
+      redirect: false,
     };
   },
   computed: {},
@@ -180,34 +181,31 @@ export default {
     var dd = String(today.getDate()).padStart(2, "0");
     var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
     var yyyy = today.getFullYear();
-    var redirect = false;
-    today = +yyyy + "-" + mm + "-" + dd;
-    // var solved = this.$cookies.get("solved");
-    // if (solved.includes(today)) {
-    //   redirect = true;
-    // }
-    // console.log("solved?", solved, "redirect? ", redirect);
-    // if (redirect && !window.location.search.includes("lemmein")) {
-    //   this.$router.push("Stats");
-    //   console.log("already solved");
-    // }
-    // else {
-    // var req = await fetch("https://api.birtle.app/word", {
-    //   mode: "cors",
-    //   cache: "no-cache",
-    //   referrerPolicy: "no-referrer",
-    // });
-    // var wordData = await req.text();
-    var wordData = {
-      word: "eagle",
-      date: "2022-03-15",
-      hint: "Associated with the largest source of funding of the freedom convoy.",
-    };
-    if (window.location.search.includes("lemmein")) {
-      console.log(wordData);
+
+    today = yyyy + "-" + mm + "-" + dd;
+    var solved = this.$cookies.get("solved");
+    if (solved.includes(today)) {
+      this.redirect = true;
     }
-    this.$store.commit("initBoard", wordData);
-    // }
+    console.log("solved?", solved, "redirect? ", this.redirect);
+    if (this.redirect && !window.location.search.includes("lemmein")) {
+      this.$router.push("Stats");
+      console.log("already solved");
+    } else {
+      var req = await fetch("https://api.birtle.app/word", {
+        mode: "cors",
+        cache: "no-cache",
+        referrerPolicy: "no-referrer",
+      });
+      var wordData = await req.text();
+      // var wordData = {
+      //   word: "eagle",
+      //   date: "2022-03-15",
+      //   hint: "Associated with the largest source of funding of the freedom convoy.",
+      // };
+
+      this.$store.commit("initBoard", wordData);
+    }
   },
 };
 </script>

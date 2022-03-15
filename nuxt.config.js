@@ -51,6 +51,9 @@ export default {
   build: {
 
   },
+  config: {
+    devtools: true
+  },
   server: {
     host: "0.0.0.0"
   }
