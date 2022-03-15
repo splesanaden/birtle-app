@@ -184,7 +184,7 @@ export default {
 
     today = yyyy + "-" + mm + "-" + dd;
     var solved = this.$cookies.get("solved");
-    if (solved.includes(today)) {
+    if (solved.indexOf(today)) {
       this.redirect = true;
     }
     console.log("solved?", solved, "redirect? ", this.redirect);
