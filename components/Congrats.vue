@@ -83,11 +83,10 @@ export default {
       var yyyy = today.getFullYear();
 
       today = mm + "/" + dd + "/" + yyyy;
-      var scores =
-        today +
-        ": I got today's Birtle in " +
-        +this.$timeFormat(this.$store.state.solveTime) +
-        ".\n";
+      var solveTime = this.$timeFormat(this.$store.state.solveTime);
+
+      console.log("solvetime", solveTime);
+      var scores = today + ": I got today's Birtle in " + solveTime + ".\n";
       for (var r in this.$store.state.board) {
         var row = this.$store.state.board[r];
         for (var c in row.cells) {
@@ -146,7 +145,7 @@ export default {
     },
     copyTextToClipboard(text) {
       if (!navigator.clipboard) {
-        fallbackCopyTextToClipboard(text);
+        this.fallbackCopyTextToClipboard(text);
         return;
       }
       navigator.clipboard.writeText(text).then(

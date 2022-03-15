@@ -1,5 +1,10 @@
 <template>
-  <div class="wg-body justify-content-start justify-content-md-center">
+  <div
+    class="wg-body justify-content-start justify-content-md-center"
+    :dim="
+      $store.state.viewHelp || $store.state.viewStats || $store.state.viewHint
+    "
+  >
     <div
       id="loader"
       class="
@@ -16,24 +21,7 @@
       <h3 class="mt-3">Get ready!</h3>
     </div>
 
-    <header class="row w-100 text-white" v-if="!loading">
-      <div class="col-3 d-flex align-items-center justify-content-center">
-        <i
-          class="fa-solid fa-crow fa-fw fa-2x wg-link chirp"
-          @click="$store.commit('toggleHelp')"
-        ></i>
-      </div>
-      <div class="col-6">
-        <h1 class="my-3 text-light text-center" style="letter-spacing: 3px">
-          BIRTLE <span style="font-size: 12px; font-weight: 300"> v0.1</span>
-        </h1>
-      </div>
-      <div class="col-3 d-flex align-items-center justify-content-center">
-        <a href="Stats" class="wg-link">
-          <i class="fa fa-bar-chart text-white fa-2x"></i>
-        </a>
-      </div>
-    </header>
+    <Header :loading="loading" />
     <main class="wg-board" v-if="!$store.state.solved && !loading">
       <div
         class="wg-row"
@@ -90,12 +78,27 @@
         <div class="row w-100 text-end mt-2">
           <i
             class="fa-solid fa-close text-light fa-2x wg-link"
-            @click="$store.commit('toggleHelp')"
+            @click="$store.commit('toggleHelp', 'intro')"
           ></i>
         </div>
         <Intro />
       </div>
     </section>
+    <section class="wg-modal" v-if="$store.state.viewStats">
+      <div class="container">
+        <div class="row w-100 text-end mt-2">
+          <i
+            class="fa-solid fa-close text-light fa-2x wg-link"
+            @click="$store.commit('toggleHelp', 'stats')"
+          ></i>
+        </div>
+        <div class="col-12">
+          <Stats />
+        </div>
+      </div>
+    </section>
+
+    <Hint :hint="$store.state.hint" v-if="$store.state.viewHint" />
   </div>
 </template>
 
@@ -170,8 +173,26 @@ export default {
       }, 1000);
     });
   },
-  mounted() {
-    this.$store.commit("initBoard");
+
+  async mounted() {
+    this.$cookies.set("solved=solved");
+    var solved = this.$cookies.get("solved");
+    console.log("solved?", solved);
+    if (solved && !window.location.search.includes("lemmein")) {
+      this.$router.push("Stats");
+      console.log("already solved");
+    } else {
+      var req = await fetch("https://api.birtle.app/word", {
+        mode: "cors",
+        cache: "no-cache",
+        referrerPolicy: "no-referrer",
+      });
+      var wordData = await req.text();
+      if (window.location.search.includes("lemmein")) {
+        console.log(wordData);
+      }
+      this.$store.commit("initBoard", wordData);
+    }
   },
 };
 </script>

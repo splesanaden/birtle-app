@@ -37,7 +37,7 @@ export default {
   background: #5a484d;
   border-radius: 4px;
   border: 0.1em solid #b195a1;
-  animation-delay: 6s;
+
   animation: fadeInUp 0.5s ease-in-out;
 }
 @keyframes fadeInUp {

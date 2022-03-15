@@ -15,7 +15,7 @@
         <i class="fa-solid fa-crow fa-fw fa-3x mb-3 birdIcon"></i>
       </div>
     </div>
-    <div class="row">
+    <div class="row" v-if="!stats">
       <div class="col text-white text-center">
         <div class="fw-bold">Welcome to Birtle</div>
         <div>
@@ -33,6 +33,7 @@
         </button>
       </div>
     </div>
+
     <BirdFact />
   </div>
 </template>
@@ -40,7 +41,9 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      stats: false,
+    };
   },
 };
 </script>

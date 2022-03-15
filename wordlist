@@ -1,0 +1,12 @@
+
+
+var words = [
+{word:'cock',date:"2022-03-15",hint:"Lover, fighter, muse."},
+{word:'talon',date:"2022-03-16",hint:"Sharp. Great at picking up garbage."},
+{word:'eagle',date:"2022-03-16",hint:"Associated with the largest source of funding of the freedom convoy."},
+{word:'chick',date:"2022-03-17",hint:"Confederate bae"},
+{word:'goose',date:"2022-03-18",hint:"Arguably the dangerous bird, after the mighty cassowary"},
+{word:'stork',date:"2022-03-19",hint:"Sexiest bird"},
+{word:'quail',date:"2022-03-20",hint:"Superhero based on this bird is voiced by Billy West"},
+{word:'robin',date:"2022-03-21",hint:"Red rockin thrush."},
+]

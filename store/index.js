@@ -159,12 +159,14 @@ export const state = () => ({
         }
     ],
     word: "talon",
+    hint: "V sharp.",
     start: false,
     solved: false,
     fail: false,
     time: 0,
     viewScores: false,
     viewHelp: true,
+    viewHint: false,
     solveTime: null,
     disableKeyboard: false,
     activeCell: {
@@ -265,7 +267,13 @@ export const mutations = {
     startGame(state) {
         state.start = true;
     },
-    initBoard(state, word) {
+    async initBoard(state, data) {
+        data = JSON.parse(atob(data))
+        // console.log('word:', data)
+
+
+        state.word = data.word;
+        state.hint = data.hint;
         for (var letter in state.word) {
             for (var row in state.board) {
                 state.board[row].cells[letter].value = state.word[letter];
@@ -348,6 +356,7 @@ export const mutations = {
                         //every cell is valid
                         state.solveTime = state.time;
                         state.solved = true;
+                        this.$cookies.set("solved");
                         return;
 
                     }
@@ -420,12 +429,22 @@ export const mutations = {
         state.time = sessionStorage.getItem('time');
     },
 
-    toggleHelp(state) {
-        state.viewHelp = !state.viewHelp;
-        state.start = !state.start;
+    toggleHelp(state, item) {
+        let vm = this;
+        if (item == 'stats') {
+            state.viewStats = !state.viewStats;
+        }
+        if (item == 'hint') {
+            state.viewHint = !state.viewHint;
+        }
+        if (item == 'intro') {
+            state.viewHelp = !state.viewHelp;
+            state.start = !state.start;
+        }
+
         if (!state.start && state.time == 0) {
             state.viewHelp = false;
-            this.$store.commit("initBoard");
+
             state.start = true;
         }
     }
