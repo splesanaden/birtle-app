@@ -356,7 +356,13 @@ export const mutations = {
                         //every cell is valid
                         state.solveTime = state.time;
                         state.solved = true;
-                        this.$cookies.set("solved");
+                        var today = new Date();
+                        var dd = String(today.getDate()).padStart(2, '0');
+                        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                        var yyyy = today.getFullYear();
+
+                        today = + yyyy + '-' + mm + '-' + dd;
+                        this.$cookies.set("solved=" + today);
                         return;
 
                     }

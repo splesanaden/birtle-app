@@ -175,10 +175,19 @@ export default {
   },
 
   async mounted() {
-    this.$cookies.set("solved=solved");
+    // this.$cookies.set("solved=solved");
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, "0");
+    var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+    var yyyy = today.getFullYear();
+    var redirect = false;
+    today = +yyyy + "-" + mm + "-" + dd;
     var solved = this.$cookies.get("solved");
-    console.log("solved?", solved);
-    if (solved && !window.location.search.includes("lemmein")) {
+    if (solved.includes(today)) {
+      redirect = true;
+    }
+    console.log("solved?", solved, "redirect? ", redirect);
+    if (redirect && !window.location.search.includes("lemmein")) {
       this.$router.push("Stats");
       console.log("already solved");
     } else {
