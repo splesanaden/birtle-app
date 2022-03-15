@@ -268,7 +268,7 @@ export const mutations = {
         state.start = true;
     },
     async initBoard(state, data) {
-        data = JSON.parse(atob(data))
+
         // console.log('word:', data)
 
 

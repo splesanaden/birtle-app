@@ -56,9 +56,9 @@
       :disableKeyboard="disableKeyboard"
     />
 
-    <Congrats v-show="$store.state.solved && !$store.state.fail" class="my-5" />
+    <Congrats v-if="$store.state.solved && !$store.state.fail" class="my-5" />
 
-    <Failure v-show="$store.state.fail" />
+    <Failure v-if="$store.state.fail" />
 
     <section class="container mt-2 mb-auto">
       <div
@@ -182,31 +182,31 @@ export default {
     var yyyy = today.getFullYear();
     var redirect = false;
     today = +yyyy + "-" + mm + "-" + dd;
-    var solved = this.$cookies.get("solved");
-    if (solved.includes(today)) {
-      redirect = true;
+    // var solved = this.$cookies.get("solved");
+    // if (solved.includes(today)) {
+    //   redirect = true;
+    // }
+    // console.log("solved?", solved, "redirect? ", redirect);
+    // if (redirect && !window.location.search.includes("lemmein")) {
+    // this.$router.push("Stats");
+    // console.log("already solved");
+    // } else {
+    // var req = await fetch("https://api.birtle.app/word", {
+    //   mode: "cors",
+    //   cache: "no-cache",
+    //   referrerPolicy: "no-referrer",
+    // });
+    // var wordData = await req.text();
+    var wordData = {
+      word: "eagle",
+      date: "2022-03-15",
+      hint: "Associated with the largest source of funding of the freedom convoy.",
+    };
+    if (window.location.search.includes("lemmein")) {
+      console.log(wordData);
     }
-    console.log("solved?", solved, "redirect? ", redirect);
-    if (redirect && !window.location.search.includes("lemmein")) {
-      this.$router.push("Stats");
-      console.log("already solved");
-    } else {
-      // var req = await fetch("https://api.birtle.app/word", {
-      //   mode: "cors",
-      //   cache: "no-cache",
-      //   referrerPolicy: "no-referrer",
-      // });
-      // var wordData = await req.text();
-      var wordData = JSON.stringify({
-        word: "eagle",
-        date: "2022-03-15",
-        hint: "Associated with the largest source of funding of the freedom convoy.",
-      });
-      if (window.location.search.includes("lemmein")) {
-        console.log(wordData);
-      }
-      this.$store.commit("initBoard", wordData);
-    }
+    this.$store.commit("initBoard", wordData);
+    // }
   },
 };
 </script>
